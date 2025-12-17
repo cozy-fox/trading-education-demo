@@ -1,0 +1,184 @@
+{
+  "common": {
+    "appName": "交易教育平台",
+    "demo": "演示模式",
+    "loading": "加载中...",
+    "error": "错误",
+    "success": "成功",
+    "cancel": "取消",
+    "confirm": "确认",
+    "save": "保存",
+    "delete": "删除",
+    "edit": "编辑",
+    "close": "关闭",
+    "search": "搜索",
+    "filter": "筛选",
+    "sort": "排序",
+    "language": "语言"
+  },
+  "nav": {
+    "home": "首页",
+    "dashboard": "仪表板",
+    "portfolio": "投资组合",
+    "markets": "市场",
+    "admin": "管理",
+    "logout": "登出",
+    "login": "登录",
+    "register": "注册"
+  },
+  "home": {
+    "hero": {
+      "title": "零风险学习",
+      "titleHighlight": "交易",
+      "subtitle": "通过我们的演示平台掌握交易艺术。使用$10,000虚拟资金、实时市场数据和专业交易工具进行练习。",
+      "getStarted": "免费开始",
+      "login": "登录"
+    },
+    "features": {
+      "realTimeData": {
+        "title": "实时数据",
+        "description": "访问来自币安和其他主要交易所的加密货币、股票和外汇实时市场数据。"
+      },
+      "zeroRisk": {
+        "title": "零风险学习",
+        "description": "使用虚拟货币练习交易策略。没有真实资金风险。"
+      },
+      "education": {
+        "title": "教育资源",
+        "description": "从为初学者设计的教程、指南和互动演练中学习。"
+      },
+      "leaderboard": {
+        "title": "竞争与学习",
+        "description": "加入排行榜，与其他交易者竞争以提高您的技能。"
+      }
+    },
+    "cta": {
+      "title": "从$10,000虚拟余额开始",
+      "subtitle": "无需信用卡。没有隐藏费用。只有纯粹的学习体验。",
+      "button": "创建免费账户"
+    },
+    "disclaimer": "⚠️ 这是一个仅用于教育目的的演示交易平台。不涉及真实货币。所有交易都是模拟的。"
+  },
+  "auth": {
+    "login": {
+      "title": "交易平台",
+      "subtitle": "演示模式 - 无风险学习交易",
+      "email": "电子邮箱",
+      "emailPlaceholder": "输入您的邮箱",
+      "password": "密码",
+      "passwordPlaceholder": "输入您的密码",
+      "loginButton": "登录",
+      "loggingIn": "登录中...",
+      "noAccount": "还没有账户？",
+      "registerLink": "在此注册",
+      "success": "登录成功！",
+      "error": "登录失败"
+    },
+    "register": {
+      "title": "创建账户",
+      "subtitle": "以$10,000演示余额开始您的交易之旅",
+      "firstName": "名字",
+      "firstNamePlaceholder": "张",
+      "lastName": "姓氏",
+      "lastNamePlaceholder": "三",
+      "email": "电子邮箱",
+      "emailPlaceholder": "zhang@example.com",
+      "password": "密码",
+      "passwordPlaceholder": "创建密码",
+      "confirmPassword": "确认密码",
+      "confirmPasswordPlaceholder": "确认密码",
+      "registerButton": "创建账户",
+      "registering": "创建账户中...",
+      "haveAccount": "已有账户？",
+      "loginLink": "在此登录",
+      "success": "注册成功！欢迎来到平台！",
+      "error": "注册失败",
+      "passwordMismatch": "密码不匹配",
+      "passwordTooShort": "密码必须至少6个字符"
+    }
+  },
+  "dashboard": {
+    "welcome": "欢迎回来",
+    "balance": "余额",
+    "totalValue": "总价值",
+    "profitLoss": "盈亏",
+    "openPositions": "持仓",
+    "todayPL": "今日盈亏"
+  },
+  "trading": {
+    "buy": "买入",
+    "sell": "卖出",
+    "market": "市价",
+    "limit": "限价",
+    "currentPrice": "当前价格",
+    "quantity": "数量",
+    "quantityPlaceholder": "输入数量",
+    "totalValue": "总价值",
+    "availableBalance": "可用余额",
+    "execute": "执行",
+    "processing": "处理中...",
+    "selectAsset": "选择资产开始交易",
+    "selectAssetChart": "选择资产查看图表",
+    "insufficientBalance": "余额不足",
+    "invalidQuantity": "请输入有效数量",
+    "tradeSuccess": "订单执行成功！",
+    "tradeError": "交易失败",
+    "trades": "交易",
+    "open": "持仓",
+    "history": "历史",
+    "noOpenTrades": "没有持仓交易",
+    "noHistory": "暂无交易历史",
+    "tradeClosed": "交易已成功关闭",
+    "closeTrade": "关闭交易",
+    "opened": "开仓",
+    "closed": "平仓",
+    "total": "总计"
+  },
+  "portfolio": {
+    "title": "投资组合",
+    "totalValue": "总价值",
+    "holdingsValue": "持仓价值",
+    "totalPL": "总盈亏",
+    "holdings": "持仓",
+    "noHoldings": "还没有持仓。开始交易以建立您的投资组合！",
+    "current": "当前"
+  },
+  "markets": {
+    "title": "市场",
+    "crypto": "加密货币",
+    "stock": "股票",
+    "forex": "外汇"
+  },
+  "admin": {
+    "title": "管理仪表板",
+    "subtitle": "管理用户、交易和平台统计",
+    "totalUsers": "总用户数",
+    "totalTrades": "总交易数",
+    "openTrades": "未平仓交易",
+    "closedTrades": "已平仓交易",
+    "activeAssets": "活跃资产",
+    "users": "用户",
+    "manageUsers": "管理所有注册用户",
+    "name": "姓名",
+    "email": "邮箱",
+    "balance": "余额",
+    "admin": "管理员",
+    "joined": "加入时间",
+    "actions": "操作",
+    "resetBalance": "重置余额",
+    "deleteUser": "删除用户",
+    "confirmDelete": "您确定要删除此用户吗？",
+    "resetSuccess": "用户余额重置成功",
+    "deleteSuccess": "用户删除成功",
+    "error": "加载管理数据失败",
+    "balanceReset": "余额重置成功",
+    "userDeleted": "用户删除成功",
+    "balanceResetError": "重置余额失败",
+    "deleteError": "删除用户失败",
+    "loadError": "加载管理数据失败",
+    "accessDenied": "需要管理员权限",
+    "yes": "是",
+    "no": "否"
+  }
+}
+

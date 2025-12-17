@@ -1,0 +1,184 @@
+{
+  "common": {
+    "appName": "Plataforma de Educación en Trading",
+    "demo": "MODO DEMO",
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "close": "Cerrar",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "sort": "Ordenar",
+    "language": "Idioma"
+  },
+  "nav": {
+    "home": "Inicio",
+    "dashboard": "Panel",
+    "portfolio": "Portafolio",
+    "markets": "Mercados",
+    "admin": "Admin",
+    "logout": "Cerrar Sesión",
+    "login": "Iniciar Sesión",
+    "register": "Registrarse"
+  },
+  "home": {
+    "hero": {
+      "title": "Aprende Trading con",
+      "titleHighlight": "Cero Riesgo",
+      "subtitle": "Domina el arte del trading con nuestra plataforma demo. Practica con $10,000 virtuales, datos de mercado en tiempo real y herramientas profesionales.",
+      "getStarted": "Comenzar Gratis",
+      "login": "Iniciar Sesión"
+    },
+    "features": {
+      "realTimeData": {
+        "title": "Datos en Tiempo Real",
+        "description": "Accede a datos de mercado en vivo de Binance y otros exchanges principales para cripto, acciones y forex."
+      },
+      "zeroRisk": {
+        "title": "Aprendizaje Sin Riesgo",
+        "description": "Practica estrategias de trading con dinero virtual. Sin riesgo de fondos reales."
+      },
+      "education": {
+        "title": "Recursos Educativos",
+        "description": "Aprende de tutoriales, guías y recorridos interactivos diseñados para principiantes."
+      },
+      "leaderboard": {
+        "title": "Compite y Aprende",
+        "description": "Únete a la tabla de clasificación y compite con otros traders para mejorar tus habilidades."
+      }
+    },
+    "cta": {
+      "title": "Comienza con $10,000 de Saldo Virtual",
+      "subtitle": "Sin tarjeta de crédito requerida. Sin tarifas ocultas. Solo experiencia de aprendizaje pura.",
+      "button": "Crear Cuenta Gratis"
+    },
+    "disclaimer": "⚠️ Esta es una plataforma de trading DEMO solo con fines educativos. No se involucra dinero real. Todas las operaciones son simuladas."
+  },
+  "auth": {
+    "login": {
+      "title": "Plataforma de Trading",
+      "subtitle": "Modo Demo - Aprende Trading Sin Riesgo",
+      "email": "Correo Electrónico",
+      "emailPlaceholder": "Ingresa tu correo",
+      "password": "Contraseña",
+      "passwordPlaceholder": "Ingresa tu contraseña",
+      "loginButton": "Iniciar Sesión",
+      "loggingIn": "Iniciando sesión...",
+      "noAccount": "¿No tienes cuenta?",
+      "registerLink": "Regístrate aquí",
+      "success": "¡Inicio de sesión exitoso!",
+      "error": "Error al iniciar sesión"
+    },
+    "register": {
+      "title": "Crear Cuenta",
+      "subtitle": "Comienza tu viaje de trading con $10,000 de saldo demo",
+      "firstName": "Nombre",
+      "firstNamePlaceholder": "Juan",
+      "lastName": "Apellido",
+      "lastNamePlaceholder": "Pérez",
+      "email": "Correo Electrónico",
+      "emailPlaceholder": "juan@ejemplo.com",
+      "password": "Contraseña",
+      "passwordPlaceholder": "Crea una contraseña",
+      "confirmPassword": "Confirmar Contraseña",
+      "confirmPasswordPlaceholder": "Confirma la contraseña",
+      "registerButton": "Crear Cuenta",
+      "registering": "Creando cuenta...",
+      "haveAccount": "¿Ya tienes cuenta?",
+      "loginLink": "Inicia sesión aquí",
+      "success": "¡Registro exitoso! ¡Bienvenido a la plataforma!",
+      "error": "Error en el registro",
+      "passwordMismatch": "Las contraseñas no coinciden",
+      "passwordTooShort": "La contraseña debe tener al menos 6 caracteres"
+    }
+  },
+  "dashboard": {
+    "welcome": "Bienvenido de nuevo",
+    "balance": "Saldo",
+    "totalValue": "Valor Total",
+    "profitLoss": "Ganancia/Pérdida",
+    "openPositions": "Posiciones Abiertas",
+    "todayPL": "G/P de Hoy"
+  },
+  "trading": {
+    "buy": "COMPRAR",
+    "sell": "VENDER",
+    "market": "Mercado",
+    "limit": "Límite",
+    "currentPrice": "Precio Actual",
+    "quantity": "Cantidad",
+    "quantityPlaceholder": "Ingresa cantidad",
+    "totalValue": "Valor Total",
+    "availableBalance": "Saldo Disponible",
+    "execute": "Ejecutar",
+    "processing": "Procesando...",
+    "selectAsset": "Selecciona un activo para comenzar a operar",
+    "selectAssetChart": "Selecciona un activo para ver el gráfico",
+    "insufficientBalance": "Saldo insuficiente",
+    "invalidQuantity": "Por favor ingresa una cantidad válida",
+    "tradeSuccess": "¡Orden ejecutada exitosamente!",
+    "tradeError": "Error en la operación",
+    "trades": "Operaciones",
+    "open": "Abiertas",
+    "history": "Historial",
+    "noOpenTrades": "No hay operaciones abiertas",
+    "noHistory": "No hay historial de operaciones aún",
+    "tradeClosed": "Operación cerrada exitosamente",
+    "closeTrade": "Cerrar Operación",
+    "opened": "Abierta",
+    "closed": "Cerrada",
+    "total": "Total"
+  },
+  "portfolio": {
+    "title": "Portafolio",
+    "totalValue": "Valor Total",
+    "holdingsValue": "Valor de Tenencias",
+    "totalPL": "G/P Total",
+    "holdings": "Tenencias",
+    "noHoldings": "Aún no tienes tenencias. ¡Comienza a operar para construir tu portafolio!",
+    "current": "Actual"
+  },
+  "markets": {
+    "title": "Mercados",
+    "crypto": "CRIPTO",
+    "stock": "ACCIONES",
+    "forex": "FOREX"
+  },
+  "admin": {
+    "title": "Panel de Administración",
+    "subtitle": "Gestionar usuarios, operaciones y estadísticas de la plataforma",
+    "totalUsers": "Usuarios Totales",
+    "totalTrades": "Operaciones Totales",
+    "openTrades": "Operaciones Abiertas",
+    "closedTrades": "Operaciones Cerradas",
+    "activeAssets": "Activos Activos",
+    "users": "Usuarios",
+    "manageUsers": "Gestionar todos los usuarios registrados",
+    "name": "Nombre",
+    "email": "Correo",
+    "balance": "Saldo",
+    "admin": "Admin",
+    "joined": "Registrado",
+    "actions": "Acciones",
+    "resetBalance": "Restablecer Saldo",
+    "deleteUser": "Eliminar Usuario",
+    "confirmDelete": "¿Estás seguro de que quieres eliminar este usuario?",
+    "resetSuccess": "Saldo de usuario restablecido exitosamente",
+    "deleteSuccess": "Usuario eliminado exitosamente",
+    "error": "Error al cargar datos de administración",
+    "balanceReset": "Saldo restablecido exitosamente",
+    "userDeleted": "Usuario eliminado exitosamente",
+    "balanceResetError": "Error al restablecer saldo",
+    "deleteError": "Error al eliminar usuario",
+    "loadError": "Error al cargar datos de administración",
+    "accessDenied": "Se requiere acceso de administrador",
+    "yes": "Sí",
+    "no": "No"
+  }
+}
+

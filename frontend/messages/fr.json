@@ -1,0 +1,184 @@
+{
+  "common": {
+    "appName": "Plateforme d'Éducation au Trading",
+    "demo": "MODE DÉMO",
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "save": "Enregistrer",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "close": "Fermer",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "sort": "Trier",
+    "language": "Langue"
+  },
+  "nav": {
+    "home": "Accueil",
+    "dashboard": "Tableau de bord",
+    "portfolio": "Portefeuille",
+    "markets": "Marchés",
+    "admin": "Admin",
+    "logout": "Déconnexion",
+    "login": "Connexion",
+    "register": "S'inscrire"
+  },
+  "home": {
+    "hero": {
+      "title": "Apprenez le Trading avec",
+      "titleHighlight": "Zéro Risque",
+      "subtitle": "Maîtrisez l'art du trading avec notre plateforme de démonstration. Pratiquez avec 10 000 $ de fonds virtuels, des données de marché en temps réel et des outils de trading professionnels.",
+      "getStarted": "Commencer Gratuitement",
+      "login": "Connexion"
+    },
+    "features": {
+      "realTimeData": {
+        "title": "Données en Temps Réel",
+        "description": "Accédez aux données de marché en direct de Binance et d'autres grandes bourses pour les cryptos, actions et forex."
+      },
+      "zeroRisk": {
+        "title": "Apprentissage Sans Risque",
+        "description": "Pratiquez des stratégies de trading avec de l'argent virtuel. Aucun risque de fonds réels."
+      },
+      "education": {
+        "title": "Ressources Éducatives",
+        "description": "Apprenez à partir de tutoriels, guides et parcours interactifs conçus pour les débutants."
+      },
+      "leaderboard": {
+        "title": "Compétition et Apprentissage",
+        "description": "Rejoignez le classement et rivalisez avec d'autres traders pour améliorer vos compétences."
+      }
+    },
+    "cta": {
+      "title": "Commencez avec 10 000 $ de Solde Virtuel",
+      "subtitle": "Aucune carte de crédit requise. Aucun frais caché. Juste une expérience d'apprentissage pure.",
+      "button": "Créer un Compte Gratuit"
+    },
+    "disclaimer": "⚠️ Ceci est une plateforme de trading DÉMO à des fins éducatives uniquement. Aucun argent réel n'est impliqué. Toutes les transactions sont simulées."
+  },
+  "auth": {
+    "login": {
+      "title": "Plateforme de Trading",
+      "subtitle": "Mode Démo - Apprenez le Trading Sans Risque",
+      "email": "Adresse Email",
+      "emailPlaceholder": "Entrez votre email",
+      "password": "Mot de passe",
+      "passwordPlaceholder": "Entrez votre mot de passe",
+      "loginButton": "Connexion",
+      "loggingIn": "Connexion en cours...",
+      "noAccount": "Vous n'avez pas de compte ?",
+      "registerLink": "Inscrivez-vous ici",
+      "success": "Connexion réussie !",
+      "error": "Échec de la connexion"
+    },
+    "register": {
+      "title": "Créer un Compte",
+      "subtitle": "Commencez votre parcours de trading avec 10 000 $ de solde démo",
+      "firstName": "Prénom",
+      "firstNamePlaceholder": "Jean",
+      "lastName": "Nom",
+      "lastNamePlaceholder": "Dupont",
+      "email": "Adresse Email",
+      "emailPlaceholder": "jean@exemple.com",
+      "password": "Mot de passe",
+      "passwordPlaceholder": "Créez un mot de passe",
+      "confirmPassword": "Confirmer le Mot de passe",
+      "confirmPasswordPlaceholder": "Confirmez le mot de passe",
+      "registerButton": "Créer un Compte",
+      "registering": "Création du compte...",
+      "haveAccount": "Vous avez déjà un compte ?",
+      "loginLink": "Connectez-vous ici",
+      "success": "Inscription réussie ! Bienvenue sur la plateforme !",
+      "error": "Échec de l'inscription",
+      "passwordMismatch": "Les mots de passe ne correspondent pas",
+      "passwordTooShort": "Le mot de passe doit contenir au moins 6 caractères"
+    }
+  },
+  "dashboard": {
+    "welcome": "Bon retour",
+    "balance": "Solde",
+    "totalValue": "Valeur Totale",
+    "profitLoss": "Profit/Perte",
+    "openPositions": "Positions Ouvertes",
+    "todayPL": "P/L d'Aujourd'hui"
+  },
+  "trading": {
+    "buy": "ACHETER",
+    "sell": "VENDRE",
+    "market": "Marché",
+    "limit": "Limite",
+    "currentPrice": "Prix Actuel",
+    "quantity": "Quantité",
+    "quantityPlaceholder": "Entrez la quantité",
+    "totalValue": "Valeur Totale",
+    "availableBalance": "Solde Disponible",
+    "execute": "Exécuter",
+    "processing": "Traitement...",
+    "selectAsset": "Sélectionnez un actif pour commencer à trader",
+    "selectAssetChart": "Sélectionnez un actif pour voir le graphique",
+    "insufficientBalance": "Solde insuffisant",
+    "invalidQuantity": "Veuillez entrer une quantité valide",
+    "tradeSuccess": "Ordre exécuté avec succès !",
+    "tradeError": "Échec de la transaction",
+    "trades": "Transactions",
+    "open": "Ouvertes",
+    "history": "Historique",
+    "noOpenTrades": "Aucune transaction ouverte",
+    "noHistory": "Pas encore d'historique de transactions",
+    "tradeClosed": "Transaction fermée avec succès",
+    "closeTrade": "Fermer la Transaction",
+    "opened": "Ouvert",
+    "closed": "Fermé",
+    "total": "Total"
+  },
+  "portfolio": {
+    "title": "Portefeuille",
+    "totalValue": "Valeur Totale",
+    "holdingsValue": "Valeur des Avoirs",
+    "totalPL": "P/L Total",
+    "holdings": "Avoirs",
+    "noHoldings": "Pas encore d'avoirs. Commencez à trader pour construire votre portefeuille !",
+    "current": "Actuel"
+  },
+  "markets": {
+    "title": "Marchés",
+    "crypto": "CRYPTO",
+    "stock": "ACTIONS",
+    "forex": "FOREX"
+  },
+  "admin": {
+    "title": "Tableau de Bord Admin",
+    "subtitle": "Gérer les utilisateurs, les transactions et les statistiques de la plateforme",
+    "totalUsers": "Utilisateurs Totaux",
+    "totalTrades": "Transactions Totales",
+    "openTrades": "Transactions Ouvertes",
+    "closedTrades": "Transactions Fermées",
+    "activeAssets": "Actifs Actifs",
+    "users": "Utilisateurs",
+    "manageUsers": "Gérer tous les utilisateurs enregistrés",
+    "name": "Nom",
+    "email": "Email",
+    "balance": "Solde",
+    "admin": "Admin",
+    "joined": "Inscrit",
+    "actions": "Actions",
+    "resetBalance": "Réinitialiser le Solde",
+    "deleteUser": "Supprimer l'Utilisateur",
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer cet utilisateur ?",
+    "resetSuccess": "Solde de l'utilisateur réinitialisé avec succès",
+    "deleteSuccess": "Utilisateur supprimé avec succès",
+    "error": "Échec du chargement des données admin",
+    "balanceReset": "Solde réinitialisé avec succès",
+    "userDeleted": "Utilisateur supprimé avec succès",
+    "balanceResetError": "Échec de la réinitialisation du solde",
+    "deleteError": "Échec de la suppression de l'utilisateur",
+    "loadError": "Échec du chargement des données admin",
+    "accessDenied": "Accès administrateur requis",
+    "yes": "Oui",
+    "no": "Non"
+  }
+}
+

@@ -1,0 +1,329 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 3, 7, 18;
+  --background-end-rgb: 0, 0, 0;
+
+  /* Professional Trading Colors */
+  --color-success: #22c55e;
+  --color-danger: #ef4444;
+  --color-warning: #f59e0b;
+  --color-info: #6366f1;
+
+  /* Glass Effect - Darker */
+  --glass-bg: rgba(15, 23, 42, 0.85);
+  --glass-border: rgba(100, 116, 139, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      135deg,
+      rgb(var(--background-start-rgb)) 0%,
+      rgb(var(--background-end-rgb)) 100%
+    );
+  background-attachment: fixed;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl lg:text-5xl;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl;
+  }
+}
+
+@layer components {
+  /* Glass Morphism Effect */
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+  }
+
+  .glass-card {
+    @apply glass rounded-2xl shadow-card hover:shadow-card-hover transition-all duration-300;
+  }
+
+  /* Button Styles */
+  .btn {
+    @apply px-6 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-dark-900;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary-600 hover:bg-primary-700 text-white focus:ring-primary-500 shadow-lg hover:shadow-glow;
+  }
+
+  .btn-success {
+    @apply btn bg-success-600 hover:bg-success-700 text-white focus:ring-success-500 shadow-lg hover:shadow-glow-success;
+  }
+
+  .btn-danger {
+    @apply btn bg-danger-600 hover:bg-danger-700 text-white focus:ring-danger-500 shadow-lg hover:shadow-glow-danger;
+  }
+
+  .btn-outline {
+    @apply btn border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white;
+  }
+
+  /* Input Styles */
+  .input {
+    @apply w-full px-4 py-3 bg-dark-800 border border-dark-700 rounded-xl text-white placeholder-dark-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300;
+  }
+
+  /* Card Styles */
+  .card {
+    @apply bg-dark-800 rounded-2xl border border-dark-700 shadow-card hover:shadow-card-hover transition-all duration-300;
+  }
+
+  .card-header {
+    @apply p-6 border-b border-dark-700;
+  }
+
+  .card-body {
+    @apply p-6;
+  }
+
+  /* Trading Specific */
+  .price-up {
+    @apply text-success-500;
+  }
+
+  .price-down {
+    @apply text-danger-500;
+  }
+
+  .bg-success {
+    @apply bg-success-600;
+  }
+
+  .bg-danger {
+    @apply bg-danger-600;
+  }
+
+  .text-success {
+    @apply text-success-500;
+  }
+
+  .text-danger {
+    @apply text-danger-500;
+  }
+
+  /* Gradient Text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-400 via-primary-500 to-primary-600;
+  }
+
+  /* Animated Background - Darker */
+  .animated-bg {
+    background: linear-gradient(
+      -45deg,
+      #000000,
+      #0a0f1e,
+      #1a1042,
+      #0a0f1e
+    );
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+  }
+
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Smooth Transitions */
+  .transition-smooth {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  /* Hover Effects */
+  .hover-lift {
+    @apply transform hover:-translate-y-1 transition-transform duration-300;
+  }
+
+  .hover-glow {
+    @apply hover:shadow-glow transition-shadow duration-300;
+  }
+}
+
+/* Custom Scrollbar - Professional Style */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #4f46e5, #6366f1);
+  border-radius: 10px;
+  border: 2px solid #0f172a;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #6366f1, #818cf8);
+}
+
+/* Firefox Scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #4f46e5 #0f172a;
+}
+
+/* Custom Scrollbar Utility Class */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #4f46e5, #6366f1);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #6366f1, #818cf8);
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #4f46e5 transparent;
+}
+
+/* Dark mode by default */
+.dark {
+  color-scheme: dark;
+}
+
+/* Selection */
+::selection {
+  background-color: rgba(99, 102, 241, 0.3);
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background-color: rgba(99, 102, 241, 0.3);
+  color: #ffffff;
+}
+
+/* Loading Animation */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.shimmer {
+  animation: shimmer 2s linear infinite;
+  background: linear-gradient(
+    to right,
+    #1e293b 4%,
+    #334155 25%,
+    #1e293b 36%
+  );
+  background-size: 1000px 100%;
+}
+
+/* Pulse Animation for Live Data */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Number Ticker Animation */
+@keyframes ticker-up {
+  0% {
+    transform: translateY(0);
+    color: #22c55e;
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes ticker-down {
+  0% {
+    transform: translateY(0);
+    color: #ef4444;
+  }
+  50% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.ticker-up {
+  animation: ticker-up 0.5s ease-out;
+}
+
+.ticker-down {
+  animation: ticker-down 0.5s ease-out;
+}
+
