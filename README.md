@@ -6,45 +6,59 @@ A comprehensive web-based trading simulator that allows users to learn trading t
 
 - 🔐 Secure user authentication with JWT
 - 💰 Virtual demo accounts with $10,000 starting balance
-- 📊 Real-time market data integration (Binance, AlphaVantage)
+- 📊 Real-time market data integration (Binance API)
 - 📈 Interactive TradingView charts
 - 💼 Portfolio management with PnL tracking
 - 📱 Responsive design (mobile & desktop)
 - 🌙 Dark mode support
+- 🌐 Multi-language support (English, Spanish, Chinese, French)
 - 🎓 Educational tutorials and walkthroughs
 - 🏆 Leaderboard for top demo traders
 - ⚙️ Admin panel for user and asset management
 
 ## Tech Stack
 
-### Frontend
-- Next.js 14 (React)
-- TypeScript
-- Tailwind CSS
-- TradingView Widget
-- Chart.js
-
-### Backend
-- Node.js
-- Express
-- TypeScript
-- MongoDB with Mongoose
-- JWT Authentication
-- bcrypt for password hashing
+- **Next.js 14** (React with App Router)
+- **TypeScript** for type safety
+- **Tailwind CSS** for styling
+- **MongoDB with Mongoose** for database
+- **JWT Authentication** for secure auth
+- **bcryptjs** for password hashing
+- **next-intl** for internationalization
+- **Zustand** for state management
+- **TradingView Widget** for charts
 
 ## Project Structure
 
 ```
 trading-education-platform/
-├── frontend/          # Next.js frontend application
-├── backend/           # Express backend API
-└── package.json       # Root package.json for running both
+├── frontend/                    # Next.js application
+│   ├── app/                     # App Router pages
+│   │   ├── api/                 # API routes (backend)
+│   │   │   ├── auth/            # Authentication endpoints
+│   │   │   ├── trading/         # Trading endpoints
+│   │   │   ├── market/          # Market data endpoints
+│   │   │   └── admin/           # Admin endpoints
+│   │   ├── dashboard/           # Dashboard page
+│   │   ├── login/               # Login page
+│   │   ├── register/            # Register page
+│   │   └── admin/               # Admin panel
+│   ├── components/              # React components
+│   ├── lib/                     # Utilities and services
+│   │   ├── db/                  # Database models and connection
+│   │   │   ├── mongodb.ts       # MongoDB connection
+│   │   │   └── models/          # Mongoose models
+│   │   ├── services/            # Business logic services
+│   │   ├── auth.ts              # JWT authentication
+│   │   └── api.ts               # API client
+│   └── messages/                # i18n translations
+└── package.json                 # Root package.json
 ```
 
 ## Getting Started
 
 ### Prerequisites
-- Node.js 18+ 
+- Node.js 18+
 - MongoDB (local or Atlas)
 - npm or yarn
 
@@ -53,36 +67,68 @@ trading-education-platform/
 1. Clone the repository
 2. Install dependencies:
 ```bash
-npm run install:all
+cd frontend && npm install
 ```
 
-3. Set up environment variables (see .env.example in frontend and backend folders)
+3. Set up environment variables:
+```bash
+cp frontend/.env.local.example frontend/.env.local
+# Edit .env.local with your settings
+```
 
-4. Run the development servers:
+4. Run the development server:
 ```bash
 npm run dev
 ```
 
-Frontend: http://localhost:3000
-Backend: http://localhost:5000
+Application: http://localhost:3000
 
 ## Environment Variables
 
-### Frontend (.env.local)
+### frontend/.env.local
 ```
-NEXT_PUBLIC_API_URL=http://localhost:5000
+# MongoDB Connection
+MONGODB_URI=mongodb://localhost:27017/trading-platform
+
+# JWT Secret (change this in production!)
+JWT_SECRET=your-super-secret-jwt-key-change-in-production
+
+# Demo Starting Balance
+DEMO_STARTING_BALANCE=10000
+
+# Demo Mode
 NEXT_PUBLIC_DEMO_MODE=true
 ```
 
-### Backend (.env)
-```
-PORT=5000
-MONGODB_URI=mongodb://localhost:27017/trading-platform
-JWT_SECRET=your-secret-key
-NODE_ENV=development
-BINANCE_API_KEY=your-binance-key (optional)
-ALPHA_VANTAGE_API_KEY=your-alpha-vantage-key (optional)
-```
+## API Endpoints
+
+### Authentication
+- `POST /api/auth/register` - Register new user
+- `POST /api/auth/login` - Login user
+- `GET /api/auth/me` - Get current user
+- `POST /api/auth/reset-balance` - Reset demo balance
+
+### Trading
+- `POST /api/trading/execute` - Execute a trade
+- `GET /api/trading/open` - Get open trades
+- `GET /api/trading/history` - Get trade history
+- `POST /api/trading/close/[tradeId]` - Close a trade
+- `GET /api/trading/portfolio` - Get portfolio
+
+### Market
+- `GET /api/market/assets` - Get all assets
+- `GET /api/market/assets/[symbol]` - Get asset by symbol
+- `POST /api/market/update-prices` - Update market prices
+
+### Admin
+- `GET /api/admin/users` - Get all users
+- `GET /api/admin/users/[userId]` - Get user by ID
+- `DELETE /api/admin/users/[userId]` - Delete user
+- `POST /api/admin/users/[userId]/reset-balance` - Reset user balance
+- `GET /api/admin/trades` - Get all trades
+- `POST /api/admin/assets` - Create/update asset
+- `DELETE /api/admin/assets/[symbol]` - Deactivate asset
+- `GET /api/admin/stats` - Get platform statistics
 
 ## License
 

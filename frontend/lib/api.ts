@@ -1,9 +1,8 @@
 import axios from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-
+// Use relative path for API routes (Next.js API routes)
 const api = axios.create({
-  baseURL: API_URL,
+  baseURL: '',
   headers: {
     'Content-Type': 'application/json',
   },

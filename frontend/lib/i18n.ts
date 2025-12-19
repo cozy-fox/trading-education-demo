@@ -17,7 +17,11 @@ export const localeFlags: Record<Locale, string> = {
   fr: '🇫🇷',
 };
 
-export default getRequestConfig(async ({ locale }) => ({
-  messages: (await import(`../messages/${locale}.json`)).default,
-}));
+export default getRequestConfig(async ({ locale }) => {
+  const resolvedLocale = locale ?? 'en';
+  return {
+    locale: resolvedLocale,
+    messages: (await import(`../messages/${resolvedLocale}.json`)).default,
+  };
+});
 
