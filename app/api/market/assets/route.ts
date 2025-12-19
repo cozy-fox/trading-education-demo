@@ -15,7 +15,15 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const assets = await marketDataService.getAllAssets();
+    let assets = await marketDataService.getAllAssets();
+
+    // If no assets exist, initialize them
+    if (assets.length === 0) {
+      console.log('No assets found, initializing market data...');
+      await marketDataService.updateAllPrices();
+      assets = await marketDataService.getAllAssets();
+    }
+
     return NextResponse.json(assets);
   } catch (error) {
     console.error('Get assets error:', error);

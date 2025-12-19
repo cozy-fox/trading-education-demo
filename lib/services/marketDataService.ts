@@ -13,6 +13,7 @@ interface BinanceTickerResponse {
 
 class MarketDataService {
   private binanceBaseUrl = 'https://api.binance.com/api/v3';
+  private binanceAvailable = true; // Track if Binance API is accessible
 
   private getCryptoName(symbol: string): string {
     const names: { [key: string]: string } = {
@@ -28,45 +29,96 @@ class MarketDataService {
     return names[symbol] || symbol;
   }
 
-  // Fetch crypto prices from Binance
+  // Fetch crypto prices from Binance or use mock data as fallback
   async fetchCryptoPrices(symbols: string[] = ['BTCUSDT', 'ETHUSDT', 'BNBUSDT', 'ADAUSDT', 'SOLUSDT']): Promise<void> {
+    // If Binance is not available, use mock data
+    if (!this.binanceAvailable) {
+      await this.generateMockCryptoData();
+      return;
+    }
+
     try {
       const promises = symbols.map(symbol => this.fetchBinanceTicker(symbol));
-      await Promise.all(promises);
+      const results = await Promise.allSettled(promises);
+
+      // Check if all requests failed (likely geo-restricted)
+      const allFailed = results.every(r => r.status === 'rejected');
+      if (allFailed) {
+        console.log('Binance API unavailable, using mock crypto data');
+        this.binanceAvailable = false;
+        await this.generateMockCryptoData();
+      }
     } catch (error) {
-      console.error('Error fetching crypto prices:', error);
+      console.error('Error fetching crypto prices, falling back to mock data:', error);
+      this.binanceAvailable = false;
+      await this.generateMockCryptoData();
     }
   }
 
   private async fetchBinanceTicker(symbol: string): Promise<void> {
-    try {
-      const response = await axios.get<BinanceTickerResponse>(
-        `${this.binanceBaseUrl}/ticker/24hr`,
-        { params: { symbol } }
-      );
+    const response = await axios.get<BinanceTickerResponse>(
+      `${this.binanceBaseUrl}/ticker/24hr`,
+      { params: { symbol }, timeout: 5000 }
+    );
 
-      const data = response.data;
-      const cleanSymbol = symbol.replace('USDT', '');
+    const data = response.data;
+    const cleanSymbol = symbol.replace('USDT', '');
+
+    await Asset.findOneAndUpdate(
+      { symbol: cleanSymbol },
+      {
+        symbol: cleanSymbol,
+        name: this.getCryptoName(cleanSymbol),
+        type: 'CRYPTO',
+        currentPrice: parseFloat(data.lastPrice),
+        change24h: parseFloat(data.priceChange),
+        changePercentage24h: parseFloat(data.priceChangePercent),
+        high24h: parseFloat(data.highPrice),
+        low24h: parseFloat(data.lowPrice),
+        volume24h: parseFloat(data.volume),
+        isActive: true,
+        lastUpdated: new Date(),
+      },
+      { upsert: true, new: true }
+    );
+  }
+
+  // Generate mock crypto data when Binance API is unavailable
+  async generateMockCryptoData(): Promise<void> {
+    const mockCryptos = [
+      { symbol: 'BTC', name: 'Bitcoin', basePrice: 43500 },
+      { symbol: 'ETH', name: 'Ethereum', basePrice: 2280 },
+      { symbol: 'BNB', name: 'Binance Coin', basePrice: 315 },
+      { symbol: 'ADA', name: 'Cardano', basePrice: 0.62 },
+      { symbol: 'SOL', name: 'Solana', basePrice: 110 },
+      { symbol: 'XRP', name: 'Ripple', basePrice: 0.63 },
+      { symbol: 'DOT', name: 'Polkadot', basePrice: 7.85 },
+      { symbol: 'DOGE', name: 'Dogecoin', basePrice: 0.095 },
+    ];
+
+    for (const crypto of mockCryptos) {
+      const randomChange = (Math.random() - 0.5) * 10; // -5% to +5%
+      const currentPrice = crypto.basePrice * (1 + randomChange / 100);
+      const change24h = currentPrice - crypto.basePrice;
+      const changePercentage24h = (change24h / crypto.basePrice) * 100;
 
       await Asset.findOneAndUpdate(
-        { symbol: cleanSymbol },
+        { symbol: crypto.symbol },
         {
-          symbol: cleanSymbol,
-          name: this.getCryptoName(cleanSymbol),
+          symbol: crypto.symbol,
+          name: crypto.name,
           type: 'CRYPTO',
-          currentPrice: parseFloat(data.lastPrice),
-          change24h: parseFloat(data.priceChange),
-          changePercentage24h: parseFloat(data.priceChangePercent),
-          high24h: parseFloat(data.highPrice),
-          low24h: parseFloat(data.lowPrice),
-          volume24h: parseFloat(data.volume),
+          currentPrice,
+          change24h,
+          changePercentage24h,
+          high24h: currentPrice * 1.03,
+          low24h: currentPrice * 0.97,
+          volume24h: Math.random() * 50000000000,
           isActive: true,
           lastUpdated: new Date(),
         },
         { upsert: true, new: true }
       );
-    } catch (error) {
-      console.error(`Error fetching ${symbol}:`, error);
     }
   }
 

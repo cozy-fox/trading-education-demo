@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useStore } from '@/lib/store';
 import { formatCurrency } from '@/lib/utils';
-import { LogOut, User, RefreshCw, TrendingUp, Sparkles, Wallet } from 'lucide-react';
+import { LogOut, User, RefreshCw, TrendingUp, Sparkles, Wallet, Shield } from 'lucide-react';
 import { authAPI } from '@/lib/api';
 import toast from 'react-hot-toast';
 import LanguageSwitcher from './LanguageSwitcher';
@@ -79,6 +79,17 @@ export default function Navbar() {
             >
               <RefreshCw className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-180 transition-transform duration-500" />
             </button>
+
+            {/* Admin Panel Link */}
+            {user?.isAdmin && (
+              <Link
+                href="/admin"
+                className="p-2 sm:p-3 glass-card hover:bg-primary-500/20 text-primary-400 hover:text-primary-300 rounded-lg sm:rounded-xl transition-all duration-300 hover:shadow-glow group"
+                title="Admin Panel"
+              >
+                <Shield className="w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 transition-transform" />
+              </Link>
+            )}
 
             {/* Language Switcher */}
             <LanguageSwitcher />
