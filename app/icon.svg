@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1"/>
+      <stop offset="100%" style="stop-color:#4f46e5"/>
+    </linearGradient>
+    <linearGradient id="lineGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#22c55e"/>
+      <stop offset="50%" style="stop-color:#10b981"/>
+      <stop offset="100%" style="stop-color:#34d399"/>
+    </linearGradient>
+  </defs>
+  <!-- Background rounded square -->
+  <rect x="32" y="32" width="448" height="448" rx="96" ry="96" fill="url(#bgGrad)"/>
+  <!-- Trading chart line going up -->
+  <path d="M 100 340 L 180 300 L 240 330 L 320 200 L 412 120" 
+        stroke="url(#lineGrad)" 
+        stroke-width="36" 
+        stroke-linecap="round" 
+        stroke-linejoin="round" 
+        fill="none"/>
+  <!-- Arrow head at end -->
+  <polygon points="412,120 370,140 380,180" fill="#34d399"/>
+  <!-- Subtle grid lines -->
+  <line x1="100" y1="380" x2="412" y2="380" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+  <line x1="100" y1="300" x2="412" y2="300" stroke="rgba(255,255,255,0.1)" stroke-width="2"/>
+  <line x1="100" y1="220" x2="412" y2="220" stroke="rgba(255,255,255,0.1)" stroke-width="2"/>
+</svg>

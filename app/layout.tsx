@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { Toaster } from 'react-hot-toast'
@@ -6,8 +6,29 @@ import { Toaster } from 'react-hot-toast'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Trading Education Platform',
-  description: 'Learn trading with virtual demo accounts',
+  title: {
+    default: 'TradePro - Trading Education Platform',
+    template: '%s | TradePro',
+  },
+  description: 'Master trading with our professional demo platform. Practice stocks, crypto, and forex trading with virtual funds in a risk-free environment.',
+  keywords: ['trading', 'demo trading', 'trading education', 'stock simulator', 'crypto trading', 'forex practice'],
+  authors: [{ name: 'TradePro' }],
+  icons: {
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+    ],
+    apple: [
+      { url: '/apple-icon.svg', type: 'image/svg+xml' },
+    ],
+  },
+  manifest: '/manifest.json',
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: '#0a0f1a',
 }
 
 export default function RootLayout({

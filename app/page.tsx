@@ -34,27 +34,29 @@ export default function HomePage() {
     <div className="min-h-screen animated-bg overflow-hidden">
       {/* Navigation */}
       <nav className="glass border-b border-dark-700/50 sticky top-0 z-50 backdrop-blur-xl">
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 sm:h-20">
-            <div className="flex items-center space-x-2 sm:space-x-3">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg sm:rounded-xl flex items-center justify-center shadow-glow">
-                <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+        <div className="max-w-7xl mx-auto px-2 xs:px-3 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-14 xs:h-16 sm:h-20">
+            <div className="flex items-center gap-1.5 xs:gap-2 sm:gap-3">
+              <div className="w-7 h-7 xs:w-8 xs:h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg sm:rounded-xl flex items-center justify-center shadow-glow flex-shrink-0">
+                <TrendingUp className="w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6 text-white" />
               </div>
-              <span className="text-lg sm:text-2xl font-bold gradient-text hidden sm:inline">
-                {t('common.appName')}
+              <span className="text-sm xs:text-lg sm:text-2xl font-bold gradient-text">
+                TradePro
               </span>
             </div>
-            <div className="flex items-center space-x-2 sm:space-x-4">
-              <LanguageSwitcher />
+            <div className="flex items-center gap-1 xs:gap-2 sm:gap-4">
+              <div className="hidden xs:block">
+                <LanguageSwitcher />
+              </div>
               <Link
                 href="/login"
-                className="px-3 py-2 sm:px-6 sm:py-2.5 text-white hover:text-primary-400 font-medium transition-all duration-300 text-sm sm:text-base"
+                className="px-2 py-1.5 xs:px-3 xs:py-2 sm:px-6 sm:py-2.5 text-white hover:text-primary-400 font-medium transition-all duration-300 text-xs xs:text-sm sm:text-base"
               >
                 {t('nav.login')}
               </Link>
               <Link
                 href="/register"
-                className="btn-primary px-3 py-2 sm:px-6 sm:py-3 text-sm sm:text-base"
+                className="btn-primary px-2 py-1.5 xs:px-3 xs:py-2 sm:px-6 sm:py-3 text-xs xs:text-sm sm:text-base"
               >
                 {t('nav.register')}
               </Link>
