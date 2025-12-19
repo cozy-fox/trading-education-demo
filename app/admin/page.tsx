@@ -90,101 +90,101 @@ export default function AdminPage() {
     <div className="min-h-screen animated-bg">
       <Navbar />
 
-      <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-[1920px] mx-auto px-2 sm:px-4 lg:px-8 py-4 sm:py-8">
         {/* Header */}
-        <div className="glass-card p-6 mb-8 animate-fade-in">
-          <div className="flex items-center space-x-4">
-            <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-700 rounded-2xl flex items-center justify-center shadow-glow">
-              <Shield className="w-8 h-8 text-white" />
+        <div className="glass-card p-4 sm:p-6 mb-4 sm:mb-8 animate-fade-in">
+          <div className="flex items-center space-x-3 sm:space-x-4">
+            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-glow flex-shrink-0">
+              <Shield className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
             </div>
-            <div>
-              <h1 className="text-4xl font-black gradient-text">{t('admin.title')}</h1>
-              <p className="text-dark-300 mt-1">{t('admin.subtitle')}</p>
+            <div className="min-w-0">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black gradient-text">{t('admin.title')}</h1>
+              <p className="text-dark-300 mt-0.5 sm:mt-1 text-sm sm:text-base truncate">{t('admin.subtitle')}</p>
             </div>
           </div>
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 lg:gap-6 mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-4 lg:gap-6 mb-4 sm:mb-8">
           {/* Total Users */}
-          <div className="glass-card p-6 hover-lift animate-slide-up">
-            <div className="flex items-center justify-between mb-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center">
-                <Users className="w-6 h-6 text-white" />
+          <div className="glass-card p-3 sm:p-6 hover-lift animate-slide-up">
+            <div className="flex items-center justify-between mb-2 sm:mb-3">
+              <div className="w-9 h-9 sm:w-12 sm:h-12 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg sm:rounded-xl flex items-center justify-center">
+                <Users className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
               </div>
             </div>
-            <p className="text-3xl font-black text-white font-mono mb-1">{stats?.totalUsers || 0}</p>
-            <p className="text-sm text-dark-400 font-semibold">{t('admin.totalUsers')}</p>
+            <p className="text-xl sm:text-3xl font-black text-white font-mono mb-0.5 sm:mb-1">{stats?.totalUsers || 0}</p>
+            <p className="text-xs sm:text-sm text-dark-400 font-semibold truncate">{t('admin.totalUsers')}</p>
           </div>
 
           {/* Total Trades */}
-          <div className="glass-card p-6 hover-lift animate-slide-up" style={{ animationDelay: '0.1s' }}>
-            <div className="flex items-center justify-between mb-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-success-500 to-success-700 rounded-xl flex items-center justify-center">
-                <TrendingUp className="w-6 h-6 text-white" />
+          <div className="glass-card p-3 sm:p-6 hover-lift animate-slide-up" style={{ animationDelay: '0.1s' }}>
+            <div className="flex items-center justify-between mb-2 sm:mb-3">
+              <div className="w-9 h-9 sm:w-12 sm:h-12 bg-gradient-to-br from-success-500 to-success-700 rounded-lg sm:rounded-xl flex items-center justify-center">
+                <TrendingUp className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
               </div>
             </div>
-            <p className="text-3xl font-black text-white font-mono mb-1">{stats?.totalTrades || 0}</p>
-            <p className="text-sm text-dark-400 font-semibold">{t('admin.totalTrades')}</p>
+            <p className="text-xl sm:text-3xl font-black text-white font-mono mb-0.5 sm:mb-1">{stats?.totalTrades || 0}</p>
+            <p className="text-xs sm:text-sm text-dark-400 font-semibold truncate">{t('admin.totalTrades')}</p>
           </div>
 
           {/* Open Trades */}
-          <div className="glass-card p-6 hover-lift animate-slide-up" style={{ animationDelay: '0.2s' }}>
-            <div className="flex items-center justify-between mb-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center">
-                <Activity className="w-6 h-6 text-white" />
+          <div className="glass-card p-3 sm:p-6 hover-lift animate-slide-up" style={{ animationDelay: '0.2s' }}>
+            <div className="flex items-center justify-between mb-2 sm:mb-3">
+              <div className="w-9 h-9 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg sm:rounded-xl flex items-center justify-center">
+                <Activity className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
               </div>
             </div>
-            <p className="text-3xl font-black text-white font-mono mb-1">{stats?.openTrades || 0}</p>
-            <p className="text-sm text-dark-400 font-semibold">{t('admin.openTrades')}</p>
+            <p className="text-xl sm:text-3xl font-black text-white font-mono mb-0.5 sm:mb-1">{stats?.openTrades || 0}</p>
+            <p className="text-xs sm:text-sm text-dark-400 font-semibold truncate">{t('admin.openTrades')}</p>
           </div>
 
           {/* Closed Trades */}
-          <div className="glass-card p-6 hover-lift animate-slide-up" style={{ animationDelay: '0.3s' }}>
-            <div className="flex items-center justify-between mb-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-dark-600 to-dark-800 rounded-xl flex items-center justify-center">
-                <CheckCircle className="w-6 h-6 text-white" />
+          <div className="glass-card p-3 sm:p-6 hover-lift animate-slide-up" style={{ animationDelay: '0.3s' }}>
+            <div className="flex items-center justify-between mb-2 sm:mb-3">
+              <div className="w-9 h-9 sm:w-12 sm:h-12 bg-gradient-to-br from-dark-600 to-dark-800 rounded-lg sm:rounded-xl flex items-center justify-center">
+                <CheckCircle className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
               </div>
             </div>
-            <p className="text-3xl font-black text-white font-mono mb-1">{stats?.closedTrades || 0}</p>
-            <p className="text-sm text-dark-400 font-semibold">{t('admin.closedTrades')}</p>
+            <p className="text-xl sm:text-3xl font-black text-white font-mono mb-0.5 sm:mb-1">{stats?.closedTrades || 0}</p>
+            <p className="text-xs sm:text-sm text-dark-400 font-semibold truncate">{t('admin.closedTrades')}</p>
           </div>
 
           {/* Active Assets */}
-          <div className="glass-card p-6 hover-lift animate-slide-up" style={{ animationDelay: '0.4s' }}>
-            <div className="flex items-center justify-between mb-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-warning-500 to-warning-700 rounded-xl flex items-center justify-center">
-                <BarChart3 className="w-6 h-6 text-white" />
+          <div className="glass-card p-3 sm:p-6 hover-lift animate-slide-up col-span-2 sm:col-span-1" style={{ animationDelay: '0.4s' }}>
+            <div className="flex items-center justify-between mb-2 sm:mb-3">
+              <div className="w-9 h-9 sm:w-12 sm:h-12 bg-gradient-to-br from-warning-500 to-warning-700 rounded-lg sm:rounded-xl flex items-center justify-center">
+                <BarChart3 className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
               </div>
             </div>
-            <p className="text-3xl font-black text-white font-mono mb-1">{stats?.activeAssets || 0}</p>
-            <p className="text-sm text-dark-400 font-semibold">{t('admin.activeAssets')}</p>
+            <p className="text-xl sm:text-3xl font-black text-white font-mono mb-0.5 sm:mb-1">{stats?.activeAssets || 0}</p>
+            <p className="text-xs sm:text-sm text-dark-400 font-semibold truncate">{t('admin.activeAssets')}</p>
           </div>
         </div>
 
         {/* Users Table */}
         <div className="glass-card overflow-hidden animate-fade-in" style={{ animationDelay: '0.5s' }}>
-          <div className="p-6 border-b border-dark-700/50 bg-gradient-to-r from-dark-800/50 to-dark-900/50">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center">
-                <Users className="w-5 h-5 text-white" />
+          <div className="p-4 sm:p-6 border-b border-dark-700/50 bg-gradient-to-r from-dark-800/50 to-dark-900/50">
+            <div className="flex items-center space-x-2 sm:space-x-3">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
+                <Users className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               </div>
-              <div>
-                <h2 className="text-2xl font-black text-white">{t('admin.users')}</h2>
-                <p className="text-sm text-dark-400">{t('admin.manageUsers')}</p>
+              <div className="min-w-0">
+                <h2 className="text-lg sm:text-2xl font-black text-white">{t('admin.users')}</h2>
+                <p className="text-xs sm:text-sm text-dark-400 truncate">{t('admin.manageUsers')}</p>
               </div>
             </div>
           </div>
           <div className="overflow-x-auto">
-            <table className="w-full">
+            <table className="w-full min-w-[700px]">
               <thead className="bg-dark-800/50">
                 <tr>
-                  <th className="px-6 py-4 text-left text-xs font-black text-primary-400 uppercase tracking-wider">{t('admin.name')}</th>
-                  <th className="px-6 py-4 text-left text-xs font-black text-primary-400 uppercase tracking-wider">{t('admin.email')}</th>
-                  <th className="px-6 py-4 text-left text-xs font-black text-primary-400 uppercase tracking-wider">{t('admin.balance')}</th>
-                  <th className="px-6 py-4 text-left text-xs font-black text-primary-400 uppercase tracking-wider">{t('admin.admin')}</th>
-                  <th className="px-6 py-4 text-left text-xs font-black text-primary-400 uppercase tracking-wider">{t('admin.joined')}</th>
-                  <th className="px-6 py-4 text-left text-xs font-black text-primary-400 uppercase tracking-wider">{t('admin.actions')}</th>
+                  <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-[10px] sm:text-xs font-black text-primary-400 uppercase tracking-wider">{t('admin.name')}</th>
+                  <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-[10px] sm:text-xs font-black text-primary-400 uppercase tracking-wider">{t('admin.email')}</th>
+                  <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-[10px] sm:text-xs font-black text-primary-400 uppercase tracking-wider">{t('admin.balance')}</th>
+                  <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-[10px] sm:text-xs font-black text-primary-400 uppercase tracking-wider">{t('admin.admin')}</th>
+                  <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-[10px] sm:text-xs font-black text-primary-400 uppercase tracking-wider">{t('admin.joined')}</th>
+                  <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-[10px] sm:text-xs font-black text-primary-400 uppercase tracking-wider">{t('admin.actions')}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-dark-700/50">
@@ -194,49 +194,49 @@ export default function AdminPage() {
                     className="hover:bg-dark-700/50 transition-all duration-300"
                     style={{ animationDelay: `${0.6 + index * 0.05}s` }}
                   >
-                    <td className="px-6 py-4">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center">
-                          <span className="text-white font-bold text-sm">
+                    <td className="px-3 sm:px-6 py-3 sm:py-4">
+                      <div className="flex items-center space-x-2 sm:space-x-3">
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-md sm:rounded-lg flex items-center justify-center flex-shrink-0">
+                          <span className="text-white font-bold text-xs sm:text-sm">
                             {u.firstName.charAt(0)}{u.lastName.charAt(0)}
                           </span>
                         </div>
-                        <span className="text-white font-semibold">{u.firstName} {u.lastName}</span>
+                        <span className="text-white font-semibold text-sm sm:text-base">{u.firstName} {u.lastName}</span>
                       </div>
                     </td>
-                    <td className="px-6 py-4 text-dark-300 font-medium">{u.email}</td>
-                    <td className="px-6 py-4">
-                      <span className="text-white font-black font-mono">{formatCurrency(u.demoBalance)}</span>
+                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-dark-300 font-medium text-xs sm:text-sm">{u.email}</td>
+                    <td className="px-3 sm:px-6 py-3 sm:py-4">
+                      <span className="text-white font-black font-mono text-xs sm:text-sm">{formatCurrency(u.demoBalance)}</span>
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="px-3 sm:px-6 py-3 sm:py-4">
                       {u.isAdmin ? (
-                        <span className="px-3 py-1 rounded-lg text-xs font-bold bg-primary-500/20 text-primary-400 flex items-center space-x-1 w-fit">
-                          <CheckCircle className="w-3 h-3" />
+                        <span className="px-2 sm:px-3 py-0.5 sm:py-1 rounded-md sm:rounded-lg text-[10px] sm:text-xs font-bold bg-primary-500/20 text-primary-400 flex items-center space-x-1 w-fit">
+                          <CheckCircle className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                           <span>{t('admin.yes')}</span>
                         </span>
                       ) : (
-                        <span className="px-3 py-1 rounded-lg text-xs font-bold bg-dark-600/50 text-dark-400 flex items-center space-x-1 w-fit">
-                          <XCircle className="w-3 h-3" />
+                        <span className="px-2 sm:px-3 py-0.5 sm:py-1 rounded-md sm:rounded-lg text-[10px] sm:text-xs font-bold bg-dark-600/50 text-dark-400 flex items-center space-x-1 w-fit">
+                          <XCircle className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                           <span>{t('admin.no')}</span>
                         </span>
                       )}
                     </td>
-                    <td className="px-6 py-4 text-dark-400 text-sm font-medium">{formatDate(u.createdAt)}</td>
-                    <td className="px-6 py-4">
-                      <div className="flex space-x-2">
+                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-dark-400 text-xs sm:text-sm font-medium">{formatDate(u.createdAt)}</td>
+                    <td className="px-3 sm:px-6 py-3 sm:py-4">
+                      <div className="flex space-x-1.5 sm:space-x-2">
                         <button
                           onClick={() => handleResetUserBalance(u._id)}
-                          className="p-2.5 glass hover:bg-primary-500/20 text-primary-400 rounded-lg transition-all duration-300 group"
+                          className="p-2 sm:p-2.5 glass hover:bg-primary-500/20 text-primary-400 rounded-md sm:rounded-lg transition-all duration-300 group"
                           title={t('admin.resetBalance')}
                         >
-                          <RefreshCw className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" />
+                          <RefreshCw className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:rotate-180 transition-transform duration-500" />
                         </button>
                         <button
                           onClick={() => handleDeleteUser(u._id)}
-                          className="btn-danger p-2.5 group"
+                          className="btn-danger p-2 sm:p-2.5 group"
                           title={t('admin.deleteUser')}
                         >
-                          <Trash2 className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                          <Trash2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:scale-110 transition-transform" />
                         </button>
                       </div>
                     </td>

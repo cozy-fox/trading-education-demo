@@ -53,14 +53,14 @@ export default function DashboardPage() {
       <Navbar />
 
       {/* Welcome Banner */}
-      <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-4">
-        <div className="glass-card p-6 animate-fade-in">
+      <div className="max-w-[1920px] mx-auto px-2 sm:px-4 lg:px-8 pt-4 sm:pt-6 pb-3 sm:pb-4">
+        <div className="glass-card p-4 sm:p-6 animate-fade-in">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-black text-white mb-2">
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-black text-white mb-1 sm:mb-2">
                 {t('dashboard.welcome')}, {user.firstName}! 👋
               </h1>
-              <p className="text-dark-300">
+              <p className="text-dark-300 text-sm sm:text-base">
                 Ready to practice your trading skills? Start by selecting an asset from the market list.
               </p>
             </div>
@@ -69,31 +69,31 @@ export default function DashboardPage() {
       </div>
 
       {/* Main Dashboard Grid */}
-      <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 pb-6">
-        <div className="grid grid-cols-12 gap-4 lg:gap-6">
+      <div className="max-w-[1920px] mx-auto px-2 sm:px-4 lg:px-8 pb-6">
+        <div className="grid grid-cols-12 gap-3 lg:gap-6">
           {/* Left Sidebar - Asset List */}
-          <div className="col-span-12 lg:col-span-2 animate-slide-up">
-            <div className="sticky top-24">
+          <div className="col-span-12 lg:col-span-3 xl:col-span-2 animate-slide-up order-2 lg:order-1">
+            <div className="lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-hidden">
               <AssetList />
             </div>
           </div>
 
           {/* Main Content Area */}
-          <div className="col-span-12 lg:col-span-7 space-y-4 lg:space-y-6 animate-fade-in" style={{ animationDelay: '0.1s' }}>
+          <div className="col-span-12 lg:col-span-6 xl:col-span-7 space-y-4 lg:space-y-6 animate-fade-in order-1 lg:order-2" style={{ animationDelay: '0.1s' }}>
             {/* Trading Chart */}
-            <div className="h-[400px] lg:h-[500px]">
+            <div className="h-[450px] sm:h-[500px] lg:h-[600px] xl:h-[650px]">
               <TradingChart />
             </div>
 
             {/* Trade History */}
-            <div className="h-[300px] lg:h-[350px]">
+            <div className="h-[350px] lg:h-[400px]">
               <TradeHistory />
             </div>
           </div>
 
           {/* Right Sidebar - Trading & Portfolio */}
-          <div className="col-span-12 lg:col-span-3 space-y-4 lg:space-y-6 animate-slide-up" style={{ animationDelay: '0.2s' }}>
-            <div className="sticky top-24 space-y-4 lg:space-y-6">
+          <div className="col-span-12 lg:col-span-3 space-y-4 lg:space-y-6 animate-slide-up order-3" style={{ animationDelay: '0.2s' }}>
+            <div className="lg:sticky lg:top-24 space-y-4 lg:space-y-6">
               {/* Trading Panel */}
               <TradingPanel />
 
