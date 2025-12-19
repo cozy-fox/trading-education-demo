@@ -9,7 +9,13 @@
     "start": "next start",
     "lint": "next lint"
   },
-  "keywords": ["trading", "demo", "education", "simulator", "nextjs"],
+  "keywords": [
+    "trading",
+    "demo",
+    "education",
+    "simulator",
+    "nextjs"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
@@ -19,6 +25,7 @@
     "clsx": "^2.1.0",
     "date-fns": "^3.6.0",
     "jsonwebtoken": "^9.0.3",
+    "lightweight-charts": "^5.1.0",
     "lucide-react": "^0.363.0",
     "mongoose": "^9.0.2",
     "next": "14.2.0",
@@ -44,4 +51,3 @@
     "typescript": "^5.4.0"
   }
 }
-

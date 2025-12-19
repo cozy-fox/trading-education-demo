@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { useStore } from '@/lib/store';
 import { useTranslation } from '@/lib/useTranslation';
 import {
@@ -14,27 +14,97 @@ import {
   ArrowDownRight,
   Info,
   Zap,
-  DollarSign,
   BarChart2
 } from 'lucide-react';
+import { createChart, CandlestickSeries, HistogramSeries } from 'lightweight-charts';
+import type { IChartApi, ISeriesApi, CandlestickData, Time } from 'lightweight-charts';
 
 const timeIntervals = [
-  { label: '1m', value: '1', tooltip: '1 Minute - Best for scalping' },
-  { label: '5m', value: '5', tooltip: '5 Minutes - Short-term trading' },
-  { label: '15m', value: '15', tooltip: '15 Minutes - Day trading' },
-  { label: '1H', value: '60', tooltip: '1 Hour - Swing trading' },
-  { label: '4H', value: '240', tooltip: '4 Hours - Position trading' },
-  { label: '1D', value: 'D', tooltip: '1 Day - Long-term analysis' },
+  { label: '1m', value: 1, tooltip: '1 Minute - Best for scalping' },
+  { label: '5m', value: 5, tooltip: '5 Minutes - Short-term trading' },
+  { label: '15m', value: 15, tooltip: '15 Minutes - Day trading' },
+  { label: '1H', value: 60, tooltip: '1 Hour - Swing trading' },
+  { label: '4H', value: 240, tooltip: '4 Hours - Position trading' },
+  { label: '1D', value: 1440, tooltip: '1 Day - Long-term analysis' },
 ];
+
+// Generate realistic candlestick data based on asset
+const generateCandlestickData = (
+  basePrice: number,
+  volatility: number,
+  intervalMinutes: number,
+  numCandles: number = 100
+): CandlestickData<Time>[] => {
+  const data: CandlestickData<Time>[] = [];
+  const now = Math.floor(Date.now() / 1000);
+  const intervalSeconds = intervalMinutes * 60;
+
+  let currentPrice = basePrice * (0.95 + Math.random() * 0.1); // Start near base price
+
+  for (let i = numCandles; i >= 0; i--) {
+    const time = (now - i * intervalSeconds) as Time;
+
+    // Random walk with trend bias
+    const trend = Math.random() > 0.48 ? 1 : -1;
+    const change = currentPrice * volatility * (Math.random() * 2 - 1 + trend * 0.1);
+
+    const open = currentPrice;
+    const close = currentPrice + change;
+    const high = Math.max(open, close) + Math.abs(change) * Math.random() * 0.5;
+    const low = Math.min(open, close) - Math.abs(change) * Math.random() * 0.5;
+
+    data.push({
+      time,
+      open: Number(open.toFixed(6)),
+      high: Number(high.toFixed(6)),
+      low: Number(low.toFixed(6)),
+      close: Number(close.toFixed(6)),
+    });
+
+    currentPrice = close;
+  }
+
+  // Adjust last candle to match current price
+  if (data.length > 0) {
+    const lastCandle = data[data.length - 1];
+    lastCandle.close = basePrice;
+    lastCandle.high = Math.max(lastCandle.high, basePrice);
+    lastCandle.low = Math.min(lastCandle.low, basePrice);
+  }
+
+  return data;
+};
+
+// Generate volume data
+const generateVolumeData = (
+  candleData: CandlestickData<Time>[],
+  baseVolume: number
+) => {
+  return candleData.map((candle) => ({
+    time: candle.time,
+    value: baseVolume * (0.5 + Math.random()),
+    color: candle.close >= candle.open ? 'rgba(34, 197, 94, 0.5)' : 'rgba(239, 68, 68, 0.5)',
+  }));
+};
 
 export default function TradingChart() {
   const { selectedAsset } = useStore();
   const { t } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
-  const [error, setError] = useState(false);
+  const chartRef = useRef<IChartApi | null>(null);
+  const candleSeriesRef = useRef<ISeriesApi<'Candlestick'> | null>(null);
+  const volumeSeriesRef = useRef<ISeriesApi<'Histogram'> | null>(null);
   const [loading, setLoading] = useState(true);
-  const [selectedInterval, setSelectedInterval] = useState('15');
+  const [error, setError] = useState(false);
+  const [selectedInterval, setSelectedInterval] = useState(15);
   const [showTip, setShowTip] = useState(true);
+  const [crosshairData, setCrosshairData] = useState<{
+    time: string;
+    open: number;
+    high: number;
+    low: number;
+    close: number;
+  } | null>(null);
 
   const formatPrice = (price: number) => {
     if (price >= 1000) return price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -49,84 +119,179 @@ export default function TradingChart() {
     return volume.toFixed(2);
   };
 
-  useEffect(() => {
-    if (!selectedAsset || !containerRef.current) return;
+  const initChart = useCallback(() => {
+    if (!containerRef.current || !selectedAsset) return;
 
-    setError(false);
-    setLoading(true);
-    containerRef.current.innerHTML = '';
-
-    const script = document.createElement('script');
-    script.src = 'https://s3.tradingview.com/tv.js';
-    script.async = true;
-    script.onerror = () => {
-      setError(true);
-      setLoading(false);
-    };
-    script.onload = () => {
-      try {
-        if (typeof (window as any).TradingView !== 'undefined') {
-          new (window as any).TradingView.widget({
-            autosize: true,
-            symbol: getSymbolForTradingView(selectedAsset.symbol, selectedAsset.type),
-            interval: selectedInterval,
-            timezone: 'Etc/UTC',
-            theme: 'dark',
-            style: '1',
-            locale: 'en',
-            toolbar_bg: '#0a0f1a',
-            enable_publishing: false,
-            hide_side_toolbar: false,
-            allow_symbol_change: false,
-            container_id: 'tradingview_widget',
-            studies: [],
-            disabled_features: ['use_localstorage_for_settings', 'header_symbol_search'],
-            enabled_features: ['hide_left_toolbar_by_default'],
-            loading_screen: { backgroundColor: '#0a0f1a', foregroundColor: '#6366f1' },
-            overrides: {
-              'paneProperties.background': '#0a0f1a',
-              'paneProperties.backgroundType': 'solid',
-              'mainSeriesProperties.candleStyle.upColor': '#22c55e',
-              'mainSeriesProperties.candleStyle.downColor': '#ef4444',
-              'mainSeriesProperties.candleStyle.borderUpColor': '#22c55e',
-              'mainSeriesProperties.candleStyle.borderDownColor': '#ef4444',
-              'mainSeriesProperties.candleStyle.wickUpColor': '#22c55e',
-              'mainSeriesProperties.candleStyle.wickDownColor': '#ef4444',
-            },
-          });
-          setTimeout(() => setLoading(false), 1500);
-        }
-      } catch (err) {
-        console.error('TradingView widget error:', err);
-        setError(true);
-        setLoading(false);
-      }
-    };
-
-    const widgetContainer = document.createElement('div');
-    widgetContainer.id = 'tradingview_widget';
-    widgetContainer.style.height = '100%';
-    widgetContainer.style.width = '100%';
-
-    if (containerRef.current) {
-      containerRef.current.appendChild(widgetContainer);
+    // Clean up existing chart
+    if (chartRef.current) {
+      chartRef.current.remove();
+      chartRef.current = null;
     }
 
-    document.head.appendChild(script);
+    setLoading(true);
+
+    // Create new chart
+    const chart = createChart(containerRef.current, {
+      layout: {
+        background: { color: '#0a0f1a' },
+        textColor: '#9ca3af',
+      },
+      grid: {
+        vertLines: { color: '#1f2937' },
+        horzLines: { color: '#1f2937' },
+      },
+      crosshair: {
+        mode: 1,
+        vertLine: {
+          color: '#6366f1',
+          width: 1,
+          style: 2,
+          labelBackgroundColor: '#6366f1',
+        },
+        horzLine: {
+          color: '#6366f1',
+          width: 1,
+          style: 2,
+          labelBackgroundColor: '#6366f1',
+        },
+      },
+      rightPriceScale: {
+        borderColor: '#1f2937',
+        scaleMargins: { top: 0.1, bottom: 0.2 },
+      },
+      timeScale: {
+        borderColor: '#1f2937',
+        timeVisible: true,
+        secondsVisible: false,
+      },
+      handleScale: {
+        axisPressedMouseMove: true,
+        mouseWheel: true,
+        pinch: true,
+      },
+      handleScroll: {
+        mouseWheel: true,
+        pressedMouseMove: true,
+        horzTouchDrag: true,
+        vertTouchDrag: false,
+      },
+    });
+
+    chartRef.current = chart;
+
+    // Add candlestick series (v5 API)
+    const candleSeries = chart.addSeries(CandlestickSeries, {
+      upColor: '#22c55e',
+      downColor: '#ef4444',
+      borderUpColor: '#22c55e',
+      borderDownColor: '#ef4444',
+      wickUpColor: '#22c55e',
+      wickDownColor: '#ef4444',
+    });
+
+    candleSeriesRef.current = candleSeries as ISeriesApi<'Candlestick'>;
+
+    // Add volume series (v5 API)
+    const volumeSeries = chart.addSeries(HistogramSeries, {
+      priceFormat: { type: 'volume' },
+      priceScaleId: 'volume',
+    });
+
+    chart.priceScale('volume').applyOptions({
+      scaleMargins: { top: 0.8, bottom: 0 },
+    });
+
+    volumeSeriesRef.current = volumeSeries as ISeriesApi<'Histogram'>;
+
+    // Generate and set data
+    const volatility = selectedAsset.type === 'CRYPTO' ? 0.02 : 0.005;
+    const candleData = generateCandlestickData(
+      selectedAsset.currentPrice,
+      volatility,
+      selectedInterval,
+      100
+    );
+    const volumeData = generateVolumeData(candleData, selectedAsset.volume24h / 24);
+
+    candleSeries.setData(candleData);
+    volumeSeries.setData(volumeData);
+
+    // Subscribe to crosshair move
+    chart.subscribeCrosshairMove((param) => {
+      if (param.time && param.seriesData.has(candleSeries)) {
+        const data = param.seriesData.get(candleSeries) as CandlestickData<Time>;
+        if (data) {
+          const date = new Date(Number(param.time) * 1000);
+          setCrosshairData({
+            time: date.toLocaleString(),
+            open: data.open,
+            high: data.high,
+            low: data.low,
+            close: data.close,
+          });
+        }
+      } else {
+        setCrosshairData(null);
+      }
+    });
+
+    // Auto-fit content
+    chart.timeScale().fitContent();
+
+    // Handle resize
+    const handleResize = () => {
+      if (containerRef.current && chartRef.current) {
+        chartRef.current.applyOptions({
+          width: containerRef.current.clientWidth,
+          height: containerRef.current.clientHeight,
+        });
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    setLoading(false);
 
     return () => {
-      if (script.parentNode) {
-        script.parentNode.removeChild(script);
-      }
+      window.removeEventListener('resize', handleResize);
     };
   }, [selectedAsset, selectedInterval]);
 
-  const getSymbolForTradingView = (symbol: string, type: string): string => {
-    if (type === 'CRYPTO') return `BINANCE:${symbol}USDT`;
-    if (type === 'STOCK') return `NASDAQ:${symbol}`;
-    if (type === 'FOREX') return `FX:${symbol}`;
-    return symbol;
-  };
+  // Initialize chart
+  useEffect(() => {
+    const cleanup = initChart();
+    return () => {
+      cleanup?.();
+      if (chartRef.current) {
+        chartRef.current.remove();
+        chartRef.current = null;
+      }
+    };
+  }, [initChart]);
+
+  // Live price updates
+  useEffect(() => {
+    if (!candleSeriesRef.current || !selectedAsset) return;
+
+    const interval = setInterval(() => {
+      const volatility = selectedAsset.type === 'CRYPTO' ? 0.001 : 0.0003;
+      const change = selectedAsset.currentPrice * volatility * (Math.random() * 2 - 1);
+      const newPrice = selectedAsset.currentPrice + change;
+
+      const now = Math.floor(Date.now() / 1000) as Time;
+
+      candleSeriesRef.current?.update({
+        time: now,
+        open: selectedAsset.currentPrice,
+        high: Math.max(selectedAsset.currentPrice, newPrice),
+        low: Math.min(selectedAsset.currentPrice, newPrice),
+        close: newPrice,
+      });
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, [selectedAsset]);
 
   // Empty state
   if (!selectedAsset) {
@@ -275,6 +440,33 @@ export default function TradingChart() {
 
       {/* Chart Container */}
       <div className="flex-1 relative bg-[#0a0f1a]">
+        {/* OHLC Overlay - shows when hovering */}
+        {crosshairData && (
+          <div className="absolute top-2 left-2 z-20 bg-dark-900/95 backdrop-blur-sm rounded-lg p-2 sm:p-3 border border-dark-700/50 shadow-xl">
+            <div className="text-[10px] sm:text-xs text-dark-400 mb-1.5">{crosshairData.time}</div>
+            <div className="grid grid-cols-4 gap-2 sm:gap-3 text-[10px] sm:text-xs">
+              <div>
+                <span className="text-dark-500">O:</span>{' '}
+                <span className="text-white font-mono">${formatPrice(crosshairData.open)}</span>
+              </div>
+              <div>
+                <span className="text-dark-500">H:</span>{' '}
+                <span className="text-success-400 font-mono">${formatPrice(crosshairData.high)}</span>
+              </div>
+              <div>
+                <span className="text-dark-500">L:</span>{' '}
+                <span className="text-danger-400 font-mono">${formatPrice(crosshairData.low)}</span>
+              </div>
+              <div>
+                <span className="text-dark-500">C:</span>{' '}
+                <span className={`font-mono ${crosshairData.close >= crosshairData.open ? 'text-success-400' : 'text-danger-400'}`}>
+                  ${formatPrice(crosshairData.close)}
+                </span>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Loading Overlay */}
         {loading && (
           <div className="absolute inset-0 bg-dark-900/90 flex items-center justify-center z-10">
@@ -295,7 +487,10 @@ export default function TradingChart() {
               <p className="text-white font-semibold mb-2">Chart Unavailable</p>
               <p className="text-dark-400 text-sm mb-4">Unable to load the trading chart</p>
               <button
-                onClick={() => window.location.reload()}
+                onClick={() => {
+                  setError(false);
+                  initChart();
+                }}
                 className="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white text-sm font-semibold rounded-lg transition-colors"
               >
                 Retry
@@ -304,7 +499,7 @@ export default function TradingChart() {
           </div>
         )}
 
-        <div ref={containerRef} className="h-full w-full" />
+        <div ref={containerRef} className="h-full w-full min-h-[300px]" />
       </div>
 
       {/* Footer - Live Indicator */}
@@ -314,11 +509,11 @@ export default function TradingChart() {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-success-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-success-500"></span>
           </span>
-          <span className="text-[10px] sm:text-xs text-dark-400 font-medium">Live Data</span>
+          <span className="text-[10px] sm:text-xs text-dark-400 font-medium">Simulated Data</span>
         </div>
         <div className="flex items-center gap-1 sm:gap-1.5 text-dark-500">
           <Info className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-          <span className="text-[10px] sm:text-[11px]">Powered by TradingView</span>
+          <span className="text-[10px] sm:text-[11px]">Lightweight Charts™</span>
         </div>
       </div>
     </div>
